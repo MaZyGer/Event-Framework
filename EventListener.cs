@@ -23,7 +23,7 @@ namespace Maz.Unity.EventFramework
 
 		public EvenTypes ListenType;
 
-		public UnityEvent Response;
+		public UnityEvent ResponseGameEvent;
 		public UnityEvent<int> ResponseInt = default;
 		public UnityEvent<float> ResponseFloat = default;
 		public UnityEvent<double> ResponseDouble = default;
@@ -41,7 +41,7 @@ namespace Maz.Unity.EventFramework
 
 		public void OnEventRaised()
 		{
-			Response.Invoke();
+			ResponseGameEvent.Invoke();
 		}
 
 		public void OnEventRaised(int value)

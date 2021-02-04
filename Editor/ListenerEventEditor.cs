@@ -7,7 +7,7 @@ using UnityEditor;
 namespace Maz.Unity.EventFramework
 {
 
-    //[CustomEditor(typeof(EventListener))]
+    [CustomEditor(typeof(EventListener))]
     public class ListenerEventEditor : Editor
     {
 		GUIContent m_IconToolbarMinus;
@@ -34,7 +34,7 @@ namespace Maz.Unity.EventFramework
 			//base.OnInspectorGUI();
 			
 			var currentSelectionProperty = serializedObject.FindProperty("ListenType");
-			var eventActionProperty = serializedObject.FindProperty("EventAction");
+			var eventActionProperty = serializedObject.FindProperty("Event");
 
 			EditorGUILayout.HelpBox("Note: All events will get invoked", MessageType.Info);
 			EditorGUILayout.PropertyField(currentSelectionProperty);
@@ -45,23 +45,23 @@ namespace Maz.Unity.EventFramework
 			switch (selectedEvenType)
 			{
 				case EvenTypes.IntEvent:
-					var onRaisIntProperty = serializedObject.FindProperty("OnRaiseIntEvent");
+					var onRaisIntProperty = serializedObject.FindProperty("ResponseInt");
 					isCollapsed = DrawCustomFoldout(onRaisIntProperty, isCollapsed);
 					break;
 				case EvenTypes.FloatEvent:
-					var onRaiseFloatProperty = serializedObject.FindProperty("OnRaiseFloatEvent");
+					var onRaiseFloatProperty = serializedObject.FindProperty("ResponseFloat");
 					isCollapsed = DrawCustomFoldout(onRaiseFloatProperty, isCollapsed);
 					break;
 				case EvenTypes.DoubleEvent:
-					var onRaiseDoubleProperty = serializedObject.FindProperty("OnRaiseDoubleEvent");
+					var onRaiseDoubleProperty = serializedObject.FindProperty("ResponseDouble");
 					isCollapsed = DrawCustomFoldout(onRaiseDoubleProperty, isCollapsed);
 					break;
 				case EvenTypes.StringEvent:
-					var onRaiseStringProperty = serializedObject.FindProperty("OnRaiseStringEvent");
+					var onRaiseStringProperty = serializedObject.FindProperty("ResponseString");
 					isCollapsed = DrawCustomFoldout(onRaiseStringProperty, isCollapsed);
 					break;
 				case EvenTypes.GameEvent:
-					var onRaiseGameEventProperty = serializedObject.FindProperty("OnRaiseGameEvent");
+					var onRaiseGameEventProperty = serializedObject.FindProperty("ResponseGameEvent");
 					isCollapsed = DrawCustomFoldout(onRaiseGameEventProperty, isCollapsed);
 					break;
 				default:
