@@ -15,6 +15,11 @@ namespace Maz.Unity.EventFramework.Example
 
 		public int Damage;
 
+		void Awake()
+		{
+			Debug.Log("Awake called");
+		}
+
 		private void Start()
 		{
 			Health.Value = playerData.MaxHealth;
@@ -42,9 +47,10 @@ namespace Maz.Unity.EventFramework.Example
 			Mana.Value -= 10;
 		}
 
-		[Signal]
+		
 		float HealAmount = 0f;
 
+		[Signal(name = "bla")]
 		void Heal(int amount)
 		{
 			Debug.Log("Heal " + amount);
