@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace Maz.Unity.EventFramework
 {
-	public class EventListener<T> : MonoBehaviour
+	public abstract class EventListener<T> : MonoBehaviour
 	{
 		public UnityEvent<T> Response = default;
 
