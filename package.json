@@ -1,6 +1,6 @@
 {
   "name": "maz.unity.eventframework",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "displayName": "ScriptableObject based events",
   "description": "This contains scriptableobject based events.",
   "unity": "2019.1",
