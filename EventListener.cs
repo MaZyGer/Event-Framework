@@ -13,12 +13,12 @@ namespace Maz.Unity.EventFramework
 
 		private void OnEnable()
 		{
-			Event.RegisterListener(this);
+			Event?.RegisterListener(this);
 		}
 
 		private void OnDisable()
 		{
-			Event.UnregisterListener(this);
+			Event?.UnregisterListener(this);
 		}
 
 		public void OnEventRaised(T value)
@@ -43,37 +43,37 @@ namespace Maz.Unity.EventFramework
 
 		private void OnEnable()
 		{
-			Event.RegisterListener(this);
+			Event?.RegisterListener(this);
 		}
 
 		private void OnDisable()
 		{
-			Event.UnregisterListener(this);
+			Event?.UnregisterListener(this);
 		}
 
 		public void OnEventRaised()
 		{
-			ResponseGameEvent.Invoke();
+			ResponseGameEvent?.Invoke();
 		}
 
 		public void OnEventRaised(int value)
 		{
-			ResponseInt.Invoke(value);
+			ResponseInt?.Invoke(value);
 		}
 
 		public void OnEventRaised(float value)
 		{
-			ResponseFloat.Invoke(value);
+			ResponseFloat?.Invoke(value);
 		}
 
 		public void OnEventRaised(double value)
 		{
-			ResponseDouble.Invoke(value);
+			ResponseDouble?.Invoke(value);
 		}
 
 		public void OnEventRaised(string value)
 		{
-			ResponseString.Invoke(value);
+			ResponseString?.Invoke(value);
 		}
 	}
 }

@@ -22,7 +22,7 @@ namespace Maz.Unity.EventFramework
 			get => value;
 			set
 			{
-				if (!this.value.Equals(value))
+				if (this.value == null || !this.value.Equals(value))
 				{
 					this.value = value;
 					changed = true;
