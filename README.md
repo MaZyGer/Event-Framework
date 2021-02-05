@@ -1,3 +1,5 @@
+Still in development. Name or other things can get changed.
+
 # Event-Framework
 
 Event Framework is Event-Based-ScriptableObject Framework which allows to make fast and easy way to communicate between multiple components.
