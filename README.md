@@ -1,6 +1,6 @@
 # Event-Framework
 
-Event Framework is Event based Scriptobject which allows to make fast easy way to communcate between multiple components.
+Event Framework is Event-Based-ScriptableObject Framework which allows to make fast and easy way to communicate between multiple components.
 
 ![Player](https://i.imgur.com/8Myjt8Z.png)
 
