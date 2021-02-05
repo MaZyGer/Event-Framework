@@ -5,14 +5,13 @@ using UnityEngine.Events;
 
 namespace Maz.Unity.EventFramework
 {
-	[System.Serializable]
-	public class EventListener<T>
+	public class EventListener<T> : MonoBehaviour
 	{
-		public UnityEvent<T> ResponseInt = default;
+		public UnityEvent<T> Response = default;
 
 		public void OnEventRaised(T value)
 		{
-			ResponseInt?.Invoke(value);
+			Response?.Invoke(value);
 		}
 
 	}
