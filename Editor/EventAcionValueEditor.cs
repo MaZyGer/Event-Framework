@@ -5,7 +5,7 @@ using UnityEditor;
 
 namespace Maz.Unity.EventFramework.Example
 {
-    [CustomPropertyDrawer(typeof(EventActionValueBase), true)]
+    //[CustomPropertyDrawer(typeof(EventActionValueBase), true)]
     public class EventAcionValueEditor : PropertyDrawer
     {
 		const float HEIGHT = 40;
@@ -38,9 +38,9 @@ namespace Maz.Unity.EventFramework.Example
 					System.Type parentType = property.serializedObject.targetObject.GetType();
 					System.Reflection.FieldInfo fi = parentType.GetField(property.propertyPath);
 
-					var o = (EventActionValueBase)fi.GetValue(property.serializedObject.targetObject);
+					//var o = (EventActionValueBase)fi.GetValue(property.serializedObject.targetObject);
 
-					o.Raise();
+					//o.Raise();
 				}
 			}
 

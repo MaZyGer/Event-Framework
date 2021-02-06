@@ -13,7 +13,7 @@ namespace Maz.Unity.EventFramework
 		GUIContent m_IconToolbarMinus;
 		GUIContent m_IconToolbarPlus;
 
-		EventAction eventListenerTarget;
+		//EventAction eventListenerTarget;
 
 		SerializedProperty isIntEventCollapsedProperty;
 		SerializedProperty isFloatEventCollapsedProperty;
@@ -23,7 +23,7 @@ namespace Maz.Unity.EventFramework
 
 		private void OnEnable()
 		{
-			eventListenerTarget = target as EventAction;
+			//eventListenerTarget = target as EventAction;
 
 			m_IconToolbarMinus = new GUIContent(EditorGUIUtility.IconContent("Toolbar Minus"));
 			m_IconToolbarPlus = new GUIContent(EditorGUIUtility.IconContent("Toolbar Plus"));
