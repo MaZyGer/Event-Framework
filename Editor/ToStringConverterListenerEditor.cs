@@ -7,7 +7,7 @@ using UnityEditor;
 namespace Maz.Unity.EventFramework
 {
 
-    [CustomEditor(typeof(ToStringConverterListener))]
+    [CustomEditor(typeof(ConvertToEvent))]
     public class ToStringConverterListenerEditor : Editor
     {
 		GUIContent m_IconToolbarMinus;
@@ -18,11 +18,11 @@ namespace Maz.Unity.EventFramework
 		SerializedProperty isOnRaiseDoubleCollapsedProperty;
 		SerializedProperty isOnRaiseStringCollapsedProperty;
 
-		ToStringConverterListener eventListenerTarget;
+		ConvertToEvent eventListenerTarget;
 
 		private void OnEnable()
 		{ 
-			eventListenerTarget = target as ToStringConverterListener;
+			eventListenerTarget = target as ConvertToEvent;
 
 			m_IconToolbarMinus = new GUIContent(EditorGUIUtility.IconContent("Toolbar Minus"));
 			m_IconToolbarPlus = new GUIContent(EditorGUIUtility.IconContent("Toolbar Plus"));

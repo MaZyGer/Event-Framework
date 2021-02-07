@@ -19,8 +19,6 @@ namespace Maz.Unity.EventFramework
 
 		string[] evenTypes = new string[] { "OnRaiseInt", "OnRaiseFloat", "OnRaiseDouble", "OnRaiseString" };
 
-		EvenTypes selectedEvenType;
-
 		private void OnEnable()
 		{
 			eventListenerTarget = target as EventListenerInt;
@@ -40,33 +38,6 @@ namespace Maz.Unity.EventFramework
 			EditorGUILayout.PropertyField(currentSelectionProperty);
 			EditorGUILayout.PropertyField(eventActionProperty);
 			EditorGUILayout.Space();
-
-			//selectedEvenType = eventListenerTarget.ListenType;
-			//switch (selectedEvenType)
-			//{
-			//	case EvenTypes.IntEvent:
-			//		var onRaisIntProperty = serializedObject.FindProperty("ResponseInt");
-			//		isCollapsed = DrawCustomFoldout(onRaisIntProperty, isCollapsed);
-			//		break;
-			//	case EvenTypes.FloatEvent:
-			//		var onRaiseFloatProperty = serializedObject.FindProperty("ResponseFloat");
-			//		isCollapsed = DrawCustomFoldout(onRaiseFloatProperty, isCollapsed);
-			//		break;
-			//	case EvenTypes.DoubleEvent:
-			//		var onRaiseDoubleProperty = serializedObject.FindProperty("ResponseDouble");
-			//		isCollapsed = DrawCustomFoldout(onRaiseDoubleProperty, isCollapsed);
-			//		break;
-			//	case EvenTypes.StringEvent:
-			//		var onRaiseStringProperty = serializedObject.FindProperty("ResponseString");
-			//		isCollapsed = DrawCustomFoldout(onRaiseStringProperty, isCollapsed);
-			//		break;
-			//	case EvenTypes.GameEvent:
-			//		var onRaiseGameEventProperty = serializedObject.FindProperty("ResponseGameEvent");
-			//		isCollapsed = DrawCustomFoldout(onRaiseGameEventProperty, isCollapsed);
-			//		break;
-			//	default:
-			//		break;
-			//}
 
 			serializedObject.ApplyModifiedProperties();
 		}
