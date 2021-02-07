@@ -87,7 +87,7 @@ namespace Maz.Unity.EventFramework
 		private void OnDisable()
 		{
 			runtimeValue = initialValue;
-			Debug.Log($"<color=#FF0000FF>OnDisable</color> - new Value {runtimeValue}");
+			//Debug.Log($"<color=#FF0000FF>OnDisable</color> - new Value {runtimeValue}");
 		}
 	}
 }
