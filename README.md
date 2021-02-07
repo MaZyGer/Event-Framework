@@ -4,9 +4,11 @@ Still in development. Name or other things can get changed.
 
 Event Framework is Event-Based-ScriptableObject Framework which allows to make fast and easy way to communicate between multiple components.
 
+In editmode  
+
 ![Player](https://i.imgur.com/zq2gtTs.png)  
 
-In editmode  
+Playmode  
 
 ![Player](https://i.imgur.com/igJzaFq.png)  
 
@@ -22,6 +24,7 @@ public class Player : MonoBehaviour
     {
         // Fire just the event to update the value
         Mana.Raise()
+        TargetSelection.Raise()
     }
     
     void UseMana()
