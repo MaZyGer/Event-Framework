@@ -76,7 +76,7 @@ namespace Maz.Unity.EventFramework
 			System.Type[] typeArguments = default;
 			if (property.propertyType == SerializedPropertyType.Generic)
 			{
-				var type = property.GetValue().GetType();
+				var type = property.serializedObject.targetObject.GetFieldValue(property.propertyPath).GetType();
 				if(type.IsGenericType)
 				{
 					typeArguments = type.GetGenericArguments();

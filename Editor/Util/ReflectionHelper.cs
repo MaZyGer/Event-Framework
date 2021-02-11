@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace Maz.Unity.EventFramework
 			System.Type[] typeArguments = default;
 			if (property.propertyType == SerializedPropertyType.Generic)
 			{
-				var type = GetValue(property).GetType();
+				var type = property.serializedObject.targetObject.GetFieldValue(property.propertyPath).GetType();
 				if (type.IsGenericType)
 				{
 					typeArguments = type.GetGenericArguments();
@@ -34,11 +35,19 @@ namespace Maz.Unity.EventFramework
 			return $"{property.displayName} ()";
 		}
 
-		public static object GetValue(this SerializedProperty property)
+
+		public static object GetFieldValue(this object obj, string varName)
 		{
-			System.Type parentType = property.serializedObject.targetObject.GetType();
-			System.Reflection.FieldInfo fi = parentType.GetField(property.propertyPath);
-			return fi.GetValue(property.serializedObject.targetObject);
+			System.Type parentType = obj.GetType();
+			FieldInfo fi = parentType.GetField(varName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance );
+			return fi.GetValue(obj);
+		}
+
+		public static object GetPropertyValue(this object obj, string varName)
+		{
+			System.Type parentType = obj.GetType();
+			PropertyInfo fi = parentType.GetProperty(varName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+			return fi.GetValue(obj);
 		}
 	}
 }

@@ -2,8 +2,13 @@
 
 namespace Maz.Unity.EventFramework
 {
+	public abstract class EventActionValue : IRaiser
+	{
+		public abstract void Raise();
+	}
+
 	[System.Serializable]
-	public class EventActionValue<T> 
+	public class EventActionValue<T> : EventActionValue
 	{
 		public EventAction<T> EventAction;
 
@@ -43,7 +48,7 @@ namespace Maz.Unity.EventFramework
 			this.value = value;
 		}
 
-		public void Raise()
+		public override void Raise()
 		{
 			EventAction?.Raise(value);
 		}

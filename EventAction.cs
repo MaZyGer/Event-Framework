@@ -5,16 +5,24 @@ using UnityEngine.Events;
 
 namespace Maz.Unity.EventFramework
 {
-	public abstract class EventActionBase : ScriptableObject
+	public interface IRaiser
+	{
+		void Raise();
+	}
+
+	public interface IRaiser<T>
+	{
+		internal void Raise(T value);
+	}
+
+	public abstract class EventActionBase : ScriptableObject, IRaiser
 	{
 		public abstract void Raise();
 	}
 
-
-	public abstract class EventActionBase<T> : EventActionBase
+	public abstract class EventAction<T> : EventActionBase, IRaiser<T>
 	{
 		List<EventListener<T>> listeners = new List<EventListener<T>>();
-
 
 		#region Raise
 		internal void Raise(T value)
@@ -36,10 +44,6 @@ namespace Maz.Unity.EventFramework
 			listeners.Remove(listener);
 		}
 
-	}
-
-	public abstract class EventAction<T> : EventActionBase<T>
-	{
 		#region Events
 		[UnityEventCollapse]
 		public UnityEvent<T> Event;
@@ -88,6 +92,11 @@ namespace Maz.Unity.EventFramework
 		{
 			runtimeValue = initialValue;
 			//Debug.Log($"<color=#FF0000FF>OnDisable</color> - new Value {runtimeValue}");
+		}
+
+		void IRaiser<T>.Raise(T value)
+		{
+			Raise(value);
 		}
 	}
 }

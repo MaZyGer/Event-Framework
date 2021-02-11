@@ -16,7 +16,7 @@ namespace Maz.Unity.EventFramework.Example
 				return EditorGUI.GetPropertyHeight(property, label);
 			}
 
-			return EditorGUI.GetPropertyHeight(property, label) + 60;
+			return EditorGUI.GetPropertyHeight(property, label) + 40;
 		}
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -60,7 +60,7 @@ namespace Maz.Unity.EventFramework.Example
 						System.Type parentType = property.serializedObject.targetObject.GetType();
 						System.Reflection.FieldInfo fi = parentType.GetField(property.propertyPath);
 
-						var o = (EventActionBase)fi.GetValue(property.serializedObject.targetObject);
+						var o = (IRaiser)fi.GetValue(property.serializedObject.targetObject);
 
 						o.Raise();
 					}
