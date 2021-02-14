@@ -13,8 +13,6 @@ namespace Maz.Unity.EventFramework
 		GUIContent m_IconToolbarMinus;
 		GUIContent m_IconToolbarPlus;
 
-		static bool isCollapsed = true;
-
 		EventListenerInt eventListenerTarget;
 
 		string[] evenTypes = new string[] { "OnRaiseInt", "OnRaiseFloat", "OnRaiseDouble", "OnRaiseString" };

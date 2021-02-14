@@ -5,7 +5,7 @@ using UnityEditor;
 
 namespace Maz.Unity.EventFramework.Example
 {
-	[CustomPropertyDrawer(typeof(EventAction<>), true)]
+	//[CustomPropertyDrawer(typeof(EventAction<>), true)]
 	public class EventAcionEditor : PropertyDrawer
     {
 		const float HEIGHT = 40;
@@ -21,6 +21,7 @@ namespace Maz.Unity.EventFramework.Example
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
+			var propPosition = position;
 			EditorGUI.PropertyField(position, property, label, true);
 
 			if(property.objectReferenceValue != null)
@@ -32,44 +33,12 @@ namespace Maz.Unity.EventFramework.Example
 
 				if (property.isExpanded)
 				{
-					position.y += 20f;
-
-					var content = new GUIContent();
-					var isPlaying = Application.isPlaying;
-
-					var s = new SerializedObject(property.objectReferenceValue);
-
-					SerializedProperty value = !isPlaying ? s.FindProperty("initialValue") : s.FindProperty("runtimeValue");
-
-					content.text = !isPlaying ? "    Initial Value" : "    Runtime Value";
-
-					s.UpdateIfRequiredOrScript();
-					EditorGUI.PropertyField(position, value, content, true);
-					s.ApplyModifiedProperties();
-
-
-					//position.height = 20;
-					position.height = 20f;
-					float height = EditorGUI.GetPropertyHeight(property, label);
-
-					position.y += height + 2f;
-
-					GUI.enabled = Application.isPlaying;
-					if (GUI.Button(position, "Raise"))
-					{
-						System.Type parentType = property.serializedObject.targetObject.GetType();
-						System.Reflection.FieldInfo fi = parentType.GetField(property.propertyPath);
-
-						var o = (IRaiser)fi.GetValue(property.serializedObject.targetObject);
-
-						o.Raise();
-					}
+					
 				}
 
 				EditorGUI.EndProperty();
 			} else {
-				if (property.isExpanded)
-					property.isExpanded = false;
+
 			}
 
 			
