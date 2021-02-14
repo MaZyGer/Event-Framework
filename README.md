@@ -4,27 +4,20 @@ Still in development. Name or other things can get changed.
 
 Event Framework is Event-Based-ScriptableObject Framework which allows to make fast and easy way to communicate between multiple components.
 
-In editmode  
+![Player](https://i.imgur.com/PWryxxJ.png)  
 
-![Player](https://i.imgur.com/zq2gtTs.png)  
-
-Playmode  
-
-![Player](https://i.imgur.com/igJzaFq.png)  
-
-Notice how it changed the name in playmode. Runtime value will be the copy of the initial value every time you start the playmode. You can edit this and after the playmode it will reset to initial value. Also raise button will be available in the playmode.
+You can use ScriptableObject directly without generic type like EventActionInt and handle changes at your own. Or you use EventActionValue<int> which will add values like in this example (above image).
 
 ```CSharp
 public class Player : MonoBehaviour
 {
-    public EventActionInt Mana;
-    public EventActionPlayer TargetSelection;
+    public EventActionValue<int> Mana;
+    public EventActionValue<Player> TargetSelection;
     
     void Start()
     {
         // Fire just the event to update the value
         Mana.Raise()
-        TargetSelection.Raise()
     }
     
     void UseMana()
@@ -39,5 +32,5 @@ public class Player : MonoBehaviour
     }
 }
 ```
-Update without problems your UI with the event listener component  
-![Text Updater](https://i.imgur.com/pHWLKaz.png)
+Update without problems your UI with the event listener component. Also the ConverToEvent is an helper which includes conversation between different types like int to float.
+![Text Updater](https://i.imgur.com/8BSbsgJ.png)
