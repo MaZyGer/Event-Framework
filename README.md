@@ -32,5 +32,5 @@ public class Player : MonoBehaviour
     }
 }
 ```
-Update without problems your UI with the event listener component. Also the ConverToEvent is an helper which includes conversation between different types like int to float.
+Update without problems your UI with the event listener component. Also the ConverToEvent is an helper which includes convertion between different types like int to float.
 ![Text Updater](https://i.imgur.com/8BSbsgJ.png)
