@@ -5,6 +5,28 @@ using UnityEngine.Events;
 
 namespace Maz.Unity.EventFramework
 {
+	public sealed class EventListener : MonoBehaviour
+	{
+		public EventAction Event;
+
+		public UnityEvent Response = default;
+
+		void OnEnable()
+		{
+			Event?.RegisterListener(this);
+		}
+
+		void OnDisable()
+		{
+			Event?.UnregisterListener(this);
+		}
+
+		public void OnEventRaised()
+		{
+			Response?.Invoke();
+		}
+	}
+
 	public abstract class EventListener<T> : MonoBehaviour
 	{
 		public EventAction<T> Event;

@@ -20,6 +20,39 @@ namespace Maz.Unity.EventFramework
 	
 	}
 
+	[CreateAssetMenu(menuName = ScriptableEventConstants.MenuName + "/" + nameof(EventAction) + "(Void)")]
+	public class EventAction : EventActionBase
+	{
+		List<EventListener> listeners = new List<EventListener>();
+
+		#region Raise
+		public void Raise()
+		{
+			for (int i = listeners.Count - 1; i >= 0; i--)
+			{
+				listeners[i].OnEventRaised();
+			}
+
+			Event?.Invoke();
+		}
+		#endregion
+
+		public void RegisterListener(EventListener listener)
+		{
+			listeners.Add(listener);
+		}
+
+		public void UnregisterListener(EventListener listener)
+		{
+			listeners.Remove(listener);
+		}
+
+		#region Events
+		[UnityEventCollapse]
+		public UnityEvent Event;
+		#endregion
+	}
+
 	public abstract class EventAction<T> : EventActionBase, IRaiser<T>
 	{
 		List<EventListener<T>> listeners = new List<EventListener<T>>();
@@ -31,6 +64,8 @@ namespace Maz.Unity.EventFramework
 			{
 				listeners[i].OnEventRaised(value);
 			}
+
+			Event?.Invoke(value);
 		}
 		#endregion
 
