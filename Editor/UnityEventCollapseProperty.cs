@@ -6,7 +6,7 @@ using UnityEngine.Events;
 namespace Maz.Unity.EventFramework
 {
 
-	[CustomPropertyDrawer(typeof(UnityEventCollapseAttribute), true)]
+	//[CustomPropertyDrawer(typeof(UnityEventCollapseAttribute), true)]
     public class UnityEventCollapseProperty : UnityEventDrawer
     {
         GUIContent m_IconToolbarMinus = new GUIContent(EditorGUIUtility.IconContent("Toolbar Minus"));

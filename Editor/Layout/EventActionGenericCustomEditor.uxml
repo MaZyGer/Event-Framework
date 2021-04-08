@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xmlns="UnityEngine.UIElements" e="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="EventActionCustomEditor.uss" />
+    <ui:VisualElement>
+        <uie:PropertyField binding-path="Event" label="Event" />
+    </ui:VisualElement>
+    <ui:VisualElement style="flex-direction: row; flex-shrink: 1;">
+        <uie:PropertyField binding-path="value" label="Debug" style="flex-shrink: 1; flex-grow: 0; width: 100%; align-items: stretch; justify-content: center; flex-direction: column; font-size: 11px; -unity-text-align: upper-left;" />
+        <ui:Button text="Raise" display-tooltip-when-elided="true" label="Value" focusable="false" name="RaiseBtn" style="flex-direction: column; -unity-text-align: upper-center; flex-shrink: 0; flex-grow: 0; width: 100px;" />
+    </ui:VisualElement>
+</ui:UXML>

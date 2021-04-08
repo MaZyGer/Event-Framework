@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-namespace Maz.Unity.EventFramework.Example
+namespace Maz.Unity.EventFramework
 {
-	//[CustomPropertyDrawer(typeof(EventAction<>), true)]
+	[CustomPropertyDrawer(typeof(EventAction), true)]
 	public class EventAcionEditor : PropertyDrawer
     {
 		const float HEIGHT = 40;
@@ -22,25 +22,24 @@ namespace Maz.Unity.EventFramework.Example
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
 			var propPosition = position;
-			EditorGUI.PropertyField(position, property, label, true);
 
-			if(property.objectReferenceValue != null)
+			propPosition.width = Screen.width - 90f;
+			EditorGUI.PropertyField(propPosition, property, label, true);
+
+			propPosition.x = Screen.width - 65f;
+			propPosition.width = 60f;
+			GUI.enabled = Application.isPlaying || EventFrameworkSettings.AllowRaiseInEditMode;
+
+			if (GUI.Button(propPosition, "Raise"))
 			{
-				var foldOut = position;
-				foldOut.height = 18;
-				property.isExpanded = EditorGUI.Foldout(foldOut, property.isExpanded, "", true);
-				EditorGUI.BeginProperty(position, label, property);
+				System.Type parentType = property.serializedObject.targetObject.GetType();
+				System.Reflection.FieldInfo fi = parentType.GetField(property.propertyPath);
 
-				if (property.isExpanded)
-				{
-					
-				}
+				var o = (EventAction)fi.GetValue(property.serializedObject.targetObject);
 
-				EditorGUI.EndProperty();
-			} else {
-
+				o.Raise();
 			}
-
+			
 			
 		}
 	}

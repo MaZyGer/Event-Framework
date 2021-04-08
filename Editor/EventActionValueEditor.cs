@@ -27,7 +27,7 @@ namespace Maz.Unity.EventFramework.Example
 				return EditorGUI.GetPropertyHeight(property, label);
 			}
 
-			return EditorGUI.GetPropertyHeight(property, label) + 60 + extendHeight;
+			return EditorGUI.GetPropertyHeight(property, label) + 20 + extendHeight;
 		}
 
 		public override bool CanCacheInspectorGUI(SerializedProperty property)
@@ -79,18 +79,7 @@ namespace Maz.Unity.EventFramework.Example
 				EditorGUI.BeginProperty(position, label, property);
 
 				var eventActionProp = property.FindPropertyRelative("EventAction");
-				 
-				if(eventActionProp != null)
-				{
-					eventActionProp.objectReferenceValue = EditorGUI.ObjectField(position, new GUIContent($"Event ({genericType?.Name ?? ""})"),
-													eventActionProp.objectReferenceValue,
-													typeof(EventActionBase),
-													true);
-				}
 
-				position.y += 20;
-				var valueProp = property.FindPropertyRelative("value");
-				EditorGUI.PropertyField(position, valueProp, new GUIContent("Value"), true);
 
 				if (enableSearch)
 				{
@@ -99,7 +88,6 @@ namespace Maz.Unity.EventFramework.Example
 						
 						position.width = originalW * 0.5f;
 						position.x = originalX;
-						position.y += 20;
 						extendHeight += 20;
 						if(list.Count > 0)
 						{
@@ -132,32 +120,54 @@ namespace Maz.Unity.EventFramework.Example
 					} 
 					else 
 					{
-						position.y += 20;
-						if (GUI.Button(position, "Select Event"))
+
+						var eventActionPropPos = position;
+						eventActionPropPos.width = position.width - 70f;
+						if (eventActionProp != null)
+						{
+							eventActionProp.objectReferenceValue = EditorGUI.ObjectField(eventActionPropPos, new GUIContent($"Event ({genericType?.Name ?? ""})"),
+															eventActionProp.objectReferenceValue,
+															typeof(EventActionBase),
+															true);
+						}
+
+						var searchBtnPos = position;
+						searchBtnPos.width = 65f;
+						searchBtnPos.y = eventActionPropPos.y - 1.5f;
+						searchBtnPos.x = Screen.width - 70f;
+						if (GUI.Button(searchBtnPos, "Select"))
 						{
 							searchMode = true;
 						}
+
+						position.y += 20;
+						var valueProp = property.FindPropertyRelative("value");
+						var valuePropPos = position;
+						valuePropPos.width = position.width - 70f;
+						EditorGUI.PropertyField(valuePropPos, valueProp, new GUIContent("Value"), true);
+
+						position.width = originalW;
+						position.x = originalX;
+
+						position.height = 20f;
+						position.y += 20f;
+
+						var raiseBtnPos = position;
+						raiseBtnPos.width = 65f;
+						raiseBtnPos.y = valuePropPos.y - 1.5f;
+						raiseBtnPos.x = Screen.width - 70f;
+
+						GUI.enabled = (Application.isPlaying || EventFrameworkSettings.AllowRaiseInEditMode) && eventActionProp.objectReferenceValue != null;
+						if (GUI.Button(raiseBtnPos, "Raise"))
+						{
+							System.Type parentType = property.serializedObject.targetObject.GetType();
+							System.Reflection.FieldInfo fi = parentType.GetField(property.propertyPath);
+
+							var o = (EventActionValue)fi.GetValue(property.serializedObject.targetObject);
+
+							o.Raise();
+						}
 					}
-
-				}
-
-
-
-				position.width = originalW;
-				position.x = originalX;
-
-				position.height = 20f;
-				position.y += 20f;
-
-				GUI.enabled = Application.isPlaying;
-				if (GUI.Button(position, "Raise"))
-				{
-					System.Type parentType = property.serializedObject.targetObject.GetType();
-					System.Reflection.FieldInfo fi = parentType.GetField(property.propertyPath);
-
-					var o = (EventActionValue)fi.GetValue(property.serializedObject.targetObject);
-
-					o.Raise();
 				}
 
 				EditorGUI.EndProperty();

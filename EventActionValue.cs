@@ -2,7 +2,7 @@
 
 namespace Maz.Unity.EventFramework
 {
-	public abstract class EventActionValue : IRaiser
+	public abstract class EventActionValue : IDebugEventAction
 	{
 		public abstract void Raise();
 	}

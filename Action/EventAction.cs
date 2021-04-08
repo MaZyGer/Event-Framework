@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace Maz.Unity.EventFramework
 {
-	public interface IRaiser
+	public interface IDebugEventAction
 	{
 		void Raise();
 	}
@@ -53,9 +53,25 @@ namespace Maz.Unity.EventFramework
 		#endregion
 	}
 
-	public abstract class EventAction<T> : EventActionBase, IRaiser<T>
+	public abstract class EventAction<T> : EventActionBase, IRaiser<T>, IDebugEventAction
 	{
 		List<EventListener<T>> listeners = new List<EventListener<T>>();
+
+		#region Events
+		[UnityEventCollapse]
+		public UnityEvent<T> Event;
+		#endregion
+
+		#region Editor Debug
+
+		[SerializeField]
+		T value = default;
+
+		public void Raise()
+		{
+			Raise(value);
+		}
+		#endregion
 
 		#region Raise
 		public void Raise(T value)
@@ -79,10 +95,7 @@ namespace Maz.Unity.EventFramework
 			listeners.Remove(listener);
 		}
 
-		#region Events
-		[UnityEventCollapse]
-		public UnityEvent<T> Event;
-		#endregion
+
 	}
 }
 
